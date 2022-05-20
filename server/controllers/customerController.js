@@ -1,4 +1,4 @@
-const { Customer } = require("../models/models");
+const { Customer, Order } = require("../models/models");
 const ApiError = require("../error/ApiError");
 const uuid = require("uuid")
 const path = require("path")
@@ -15,11 +15,21 @@ class CustomerController {
         gender,
         age,
         addressId,
+        // orders
       } = req.body;
 
       const { photo } = req.files;
       let fileName = uuid.v4() + ".jpg"
       photo.mv(path.resolve(__dirname, "..", "static", fileName))
+
+      // if (orders){
+      //   orders = JSON.parse(orders)
+      //   orders.forEach(order => {
+      //     Order.create({
+
+      //     })
+      //   });
+      // }
 
       const customer = await Customer.create({
         name,
@@ -40,10 +50,16 @@ class CustomerController {
   }
 
   async getAll(req, res) {
-    const customers = await Customer.findAll();
+    let { limit, page } = req.query;
+    page = page || 1;
+    limit = limit || 10;
+    let offset = page * limit - limit;
+    const customers = await Customer.findAndCountAll({ limit, offset });
     return res.json(customers);
   }
-  async getOne(req, res) {}
+  async getOne(req, res) {
+    
+  }
   async delete(req, res) {}
   async update(req, res) {}
 }

@@ -40,7 +40,7 @@ const Vendor = sequelize.define("vendor", {
   name: { type: DataTypes.STRING, allowNull: false, unique: true },
   raiting: { type: DataTypes.INTEGER, defaultValue: 0 },
   phone: { type: DataTypes.STRING, unique: true },
-  email: { type: DataTypes.INTEGER, unique: true },
+  email: { type: DataTypes.STRING, unique: true },
 });
 
 const Product = sequelize.define("product", {
@@ -52,8 +52,8 @@ const Product = sequelize.define("product", {
   brandProduct: { type: DataTypes.STRING, allowNull: false },
   price: { type: DataTypes.INTEGER, defaultValue: 0 },
   img: { type: DataTypes.STRING }, //img
-  title: { type: DataTypes.INTEGER },
-  description: { type: DataTypes.INTEGER },
+  title: { type: DataTypes.STRING },
+  description: { type: DataTypes.TEXT },
 });
 
 const News = sequelize.define("news", {

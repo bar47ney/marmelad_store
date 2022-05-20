@@ -1,8 +1,10 @@
 const Router = require("express");
 const router = new Router();
+const ProductController = require("../controllers/productController")
 
-router.get("/");
+router.get("/", ProductController.getAll);
+router.get("/vendor/:vendorId", ProductController.getAllByVendor);
 router.get("/:id");
-router.post("/");
+router.post("/", ProductController.create);
 
 module.exports = router;

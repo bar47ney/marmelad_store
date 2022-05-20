@@ -28,11 +28,33 @@ class NewsController {
   }
 
   async getAll(req, res) {
+    let { limit, page } = req.query;
+    page = page || 1;
+    limit = limit || 10;
+    let offset = page * limit - limit;
+    const newss = await News.findAndCountAll({ limit, offset });
+    return res.json(newss);
+  }
+
+  async getAll(req, res) {
+    let { limit, page } = req.query;
+    page = page || 1;
+    limit = limit || 10;
+    let offset = page * limit - limit;
+    const newss = await News.findAndCountAll({ limit, offset });
+    return res.json(newss);
+  }
+
+  async getAllByName(req, res) {
     const { name } = req.query;
     const newss = await News.findAll({ where: { name } });
     return res.json(newss);
   }
-  async getOne(req, res) {}
+  async getOne(req, res) {
+    const { id } = req.params;
+    const news = await News.findOne({ where: { id } });
+    return res.json(news)
+  }
   async delete(req, res) {}
   async update(req, res) {}
 }

@@ -9,7 +9,7 @@ class AddressController {
         country,
         city,
         street,
-        home
+        home,
       });
 
       return res.json(address);
@@ -19,7 +19,11 @@ class AddressController {
   }
 
   async getAll(req, res) {
-    const addresses = await Address.findAll();
+    let { limit, page } = req.query;
+    page = page || 1;
+    limit = limit || 10;
+    let offset = page * limit - limit;
+    const addresses = await Address.findAndCountAll({ limit, offset });
     return res.json(addresses);
   }
   async getOne(req, res) {}
