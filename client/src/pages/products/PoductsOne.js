@@ -4,24 +4,20 @@ import Crud from "../../service/crud.service";
 import Spinner from "../../components/Spinner";
 import { NavLink } from "react-router-dom";
 import NotFound from "../NotFound";
-// import { editproduct } from "../../components/reducer/reducer";
 import Context from "../../context/context";
+import MyModal from "../../components/MyModal/MyModal";
+import ProductPay from "../products/ProductPay"
 
-const ProductsOne = (props) => {
+const ProductsOne = () => {
   const [error, setError] = useState();
   const { id } = useParams();
   const productCrud = new Crud("product");
   const [product, setProduct] = useState({});
   const [viewSpinner, setViewSpinner] = useState(false);
-  const [viewEditForm, setViewEditForm] = useState(false);
+  const [showModal, setShowModal] = useState(false);
 
-  const { state, dispatch } = useContext(Context);
-
-  const onChange = (e) => {
-    const field = e.target.id;
-    field === "productId" || field === "id"
-      ? setProduct({ ...product, [field]: +e.target.value })
-      : setProduct({ ...product, [field]: e.target.value });
+  const show = () => {
+    setShowModal(true);
   };
 
   useEffect(() => {
@@ -42,62 +38,22 @@ const ProductsOne = (props) => {
       });
   };
 
-  const saveproduct = (e) => {
-    e.preventDefault();
-    setViewSpinner(true);
-    productCrud
-      .update(product.id, product)
-      .then((res) => {
-        setViewSpinner(false);
-        setProduct(res.data);
-        // dispatch(editproduct(res.data, product.id));
-        setViewEditForm(false);
-        console.log(product);
-      })
-      .catch((err) => {
-        setError(err);
-        setViewSpinner(false);
-      });
-  };
-
-  //   console.log(id);
-  console.log(product);
-  //   console.log(error);
-
   return (
     <>
       {viewSpinner ? (
         <Spinner />
       ) : error ? (
         <NotFound title={error.message} />
-      ) : viewEditForm ? (
-        <form className="container m-5 col-6" onSubmit={saveproduct}>
-          {product &&
-            Object.keys(product).map((field, index) => {
-              if (field === "id" || field === "address" || field === "company")
-                return;
-              return (
-                <div className="mb-3" key={index}>
-                  <label htmlFor={field} className="form-label">
-                    {field}
-                  </label>
-                  <input
-                    type="text"
-                    className="form-control"
-                    required
-                    value={product[field]}
-                    id={field}
-                    onChange={onChange}
-                  />
-                </div>
-              );
-            })}
-          <button type="submit" className="btn btn-primary">
-            Save
-          </button>
-        </form>
       ) : (
         <>
+          <MyModal
+            visible={showModal}
+            onCancel={() => setShowModal(false)}
+            closeButtonShow
+            title="Оформить заказ"
+          >
+            <ProductPay closeModal={() => setShowModal(false)} product={product}/>
+          </MyModal>
           <div class="container text-center">
             <div class="row">
               <div class="col">
@@ -106,7 +62,6 @@ const ProductsOne = (props) => {
             </div>
             <div class="row">
               <div class="col">
-                {" "}
                 <img
                   src={`${process.env.REACT_APP_MARMELAD_STORE_API_URL}${product.img}`}
                   className="card-img-top"
@@ -125,7 +80,7 @@ const ProductsOne = (props) => {
                 <button
                   type="submit"
                   className="btn btn-primary m-1"
-                  onClick={() => setViewEditForm(true)}
+                  onClick={show}
                 >
                   Заказать
                 </button>
@@ -249,12 +204,12 @@ const ProductsOne = (props) => {
                 </div>
               </div>
             </div>
-          </div>
-          <div class="row text-center">
-            <div class="col">
-              <NavLink to="/products" className="btn btn-primary">
-                К продуктам
-              </NavLink>
+            <div class="row text-center m-3">
+              <div class="col">
+                <NavLink to="/products" className="btn btn-primary">
+                  К продуктам
+                </NavLink>
+              </div>
             </div>
           </div>
         </>

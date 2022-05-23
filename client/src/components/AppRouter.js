@@ -10,6 +10,8 @@ import Context from "../context/context";
 import Login from "./Login";
 import Products from "../pages/products/Products";
 import ProductsOne from "../pages/products/PoductsOne";
+import Orders from "../pages/orders/Orders";
+import Customers from "../pages/customers/Customers";
 
 const AppRouter = () => {
   const [toggle, setToggle] = useState(false);
@@ -18,9 +20,9 @@ const AppRouter = () => {
   return state.session ? (
     <Routes>
       <Route path="/" element={<MyToggleButton />} />
-      <Route exact path="/customers" element={<Users />} />
+      <Route exact path="/customers" element={<Customers />} />
       <Route exact path="/product/:id" element={<ProductsOne />} />
-      <Route path="/orders" element={<Counter />} />
+      <Route path="/orders" element={<Orders />} />
       <Route path="/news" element={<Posts />} />
       <Route path="/products" element={<Products />} />
       <Route path="*" element={<NotFound />} />

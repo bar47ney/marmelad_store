@@ -88,7 +88,7 @@ OrderContent.belongsTo(Order);
 Address.hasOne(Vendor);
 Vendor.belongsTo(Address);
 
-Product.hasOne(OrderContent);
+Product.hasMany(OrderContent);
 OrderContent.belongsTo(Product);
 
 Vendor.hasMany(Product);

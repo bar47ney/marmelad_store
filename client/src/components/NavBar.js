@@ -8,19 +8,19 @@ const NavBar = () => {
   const { state, dispatch } = useContext(Context);
   const links = [
     {
-      name: "Products",
+      name: "Продукты",
       link: "/products",
     },
     {
-      name: "Orders",
+      name: "Заказы",
       link: "/orders",
     },
     {
-      name: "Customers",
+      name: "Покупатели",
       link: "/customers",
     },
     {
-      name: "News",
+      name: "Новости",
       link: "/news",
     },
   ];
