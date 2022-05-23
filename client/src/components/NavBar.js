@@ -8,10 +8,6 @@ const NavBar = () => {
   const { state, dispatch } = useContext(Context);
   const links = [
     {
-      name: "Home",
-      link: "/",
-    },
-    {
       name: "Products",
       link: "/products",
     },

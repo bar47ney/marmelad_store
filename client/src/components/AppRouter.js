@@ -9,6 +9,7 @@ import NotFound from "../pages/NotFound";
 import Context from "../context/context";
 import Login from "./Login";
 import Products from "../pages/products/Products";
+import ProductsOne from "../pages/products/PoductsOne";
 
 const AppRouter = () => {
   const [toggle, setToggle] = useState(false);
@@ -18,7 +19,7 @@ const AppRouter = () => {
     <Routes>
       <Route path="/" element={<MyToggleButton />} />
       <Route exact path="/customers" element={<Users />} />
-      <Route exact path="/product/:id" element={<UserEdit />} />
+      <Route exact path="/product/:id" element={<ProductsOne />} />
       <Route path="/orders" element={<Counter />} />
       <Route path="/news" element={<Posts />} />
       <Route path="/products" element={<Products />} />
