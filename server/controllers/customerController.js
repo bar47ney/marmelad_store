@@ -58,7 +58,9 @@ class CustomerController {
     return res.json(customers);
   }
   async getOne(req, res) {
-    
+    const { id } = req.params;
+    const customer = await Customer.findOne({ where: { id } });
+    return res.json(customer);
   }
   async delete(req, res) {}
   async update(req, res) {}

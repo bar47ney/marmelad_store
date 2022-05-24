@@ -32,10 +32,10 @@ const Orders = () => {
         <table className="table">
           <thead>
             <tr>
-              <th>id</th>
-              <th>Name</th>
-              <th>Email</th>
-              <th>Phone</th>
+              <th>Номер заказа</th>
+              <th>Номер покупателя</th>
+              <th>Общая сумма заказа BYN</th>
+              <th>Статус оплаты</th>
             </tr>
           </thead>
           <tbody>
@@ -45,9 +45,11 @@ const Orders = () => {
                   <td>
                     <Link to={`/order/${order.id}`}>{order.id}</Link>
                   </td>
+                  <td>
+                    <Link to={`/customers/${order.customerId}`}>{order.customerId}</Link>
+                  </td>
                   <td>{order.totalPrice}</td>
-                  <td>{order.isPay}</td>
-                  <td>{order.customerId}</td>
+                  <td className={order.isPay ? "text-success" : "text-danger"}>{order.isPay ? "Оплачен" : "Не оплачен"}</td>
                   <td>
                     <button
                     //   onClick={() => deleteThisUser(order)}

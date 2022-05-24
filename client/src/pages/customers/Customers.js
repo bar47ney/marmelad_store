@@ -43,8 +43,8 @@ const Customers = () => {
                 customers.map((customer, index) => (
                   <tr key={index}>
                     <td>
-                      <Link to={`/order/${customer.id}`}>{customer.id}</Link>
-                    </td>
+                    <Link to={`/customers/${customer.id}`}>{customer.id}</Link>
+                  </td>
                     <td>{customer.name}</td>
                     <td>{customer.phone}</td>
                     <td>{customer.email}</td>

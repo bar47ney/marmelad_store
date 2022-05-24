@@ -12,16 +12,28 @@ const NavBar = () => {
       link: "/products",
     },
     {
-      name: "Заказы",
+      name: "Новости",
+      link: "/news",
+    },
+    {
+      name: "Отзывы",
+      link: "/feedbacks",
+    },
+    {
+      name: "О нас",
+      link: "/about",
+    },
+    {
+      name: "Контакты",
+      link: "/contacts",
+    },
+    {
+      name: "|Заказы",
       link: "/orders",
     },
     {
       name: "Покупатели",
       link: "/customers",
-    },
-    {
-      name: "Новости",
-      link: "/news",
     },
   ];
 

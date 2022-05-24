@@ -39,6 +39,7 @@ import { useReducer } from "react";
 import { BrowserRouter } from "react-router-dom";
 import AppRouter from "./components/AppRouter";
 import NavBar from "./components/NavBar";
+import Footer from "./components/footer/Footer";
 import { reducer } from "./components/reducer/reducer";
 import Context from "./context/context";
 
@@ -62,6 +63,7 @@ const App = () => {
         <BrowserRouter>
           <NavBar />
           <AppRouter />
+          <Footer />
         </BrowserRouter>
       </div>
     </Context.Provider>

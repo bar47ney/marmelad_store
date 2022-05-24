@@ -57,7 +57,7 @@ class OrderController {
       const orderContent = await OrderContent.create({
         productQty,
         productId,
-        orderId: order.id
+        orderId: order.id,
       });
 
       return res.json(order);
@@ -69,12 +69,25 @@ class OrderController {
   async getAll(req, res) {
     let { limit, page } = req.query;
     page = page || 1;
-    limit = limit || 10;
+    limit = limit || 15;
     let offset = page * limit - limit;
     const orders = await Order.findAndCountAll({ limit, offset });
     return res.json(orders);
   }
-  async getOne(req, res) {}
+  async getOne(req, res) {
+    const { id } = req.params;
+    const order = await Order.findOne({ where: { id } });
+
+    const customer = await Customer.findOne({ where: { id: order.customerId } });
+
+    const orderContent = await OrderContent.findOne({
+      where: { orderId: order.id },
+    });
+    const product = await Product.findOne({
+      where: { id: orderContent.productId },
+    });
+    return res.json({ order, orderContent, product, customer });
+  }
   async delete(req, res) {}
   async update(req, res) {}
 }

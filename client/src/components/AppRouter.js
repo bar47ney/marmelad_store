@@ -12,6 +12,8 @@ import Products from "../pages/products/Products";
 import ProductsOne from "../pages/products/PoductsOne";
 import Orders from "../pages/orders/Orders";
 import Customers from "../pages/customers/Customers";
+import CustomersOne from "../pages/customers/CustomersOne";
+import OrdersOne from "../pages/orders/OrdersOne";
 
 const AppRouter = () => {
   const [toggle, setToggle] = useState(false);
@@ -21,10 +23,12 @@ const AppRouter = () => {
     <Routes>
       <Route path="/" element={<MyToggleButton />} />
       <Route exact path="/customers" element={<Customers />} />
+      <Route exact path="/customers/:id" element={<CustomersOne />} />
       <Route exact path="/product/:id" element={<ProductsOne />} />
-      <Route path="/orders" element={<Orders />} />
-      <Route path="/news" element={<Posts />} />
       <Route path="/products" element={<Products />} />
+      <Route path="/orders" element={<Orders />} />
+      <Route exact path="/order/:id" element={<OrdersOne />} />
+      <Route path="/news" element={<Posts />} />
       <Route path="*" element={<NotFound />} />
     </Routes>
   ) : (
