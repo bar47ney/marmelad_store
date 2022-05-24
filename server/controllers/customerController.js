@@ -52,7 +52,7 @@ class CustomerController {
   async getAll(req, res) {
     let { limit, page } = req.query;
     page = page || 1;
-    limit = limit || 10;
+    limit = limit || 20;
     let offset = page * limit - limit;
     const customers = await Customer.findAndCountAll({ limit, offset });
     return res.json(customers);

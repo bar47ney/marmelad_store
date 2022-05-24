@@ -39,18 +39,8 @@ const links = [
 const Footer = () => {
   return (
     <div class="site-section bg-dark mt-5">
-      <div class="container">
-        <div class="cta d-block d-md-flex align-items-center px-5 bg-success">
-          <div>
-            <h2 class="mb-0">Ready for a next project?</h2>
-            <h3 class="text-dark">Let's get started!</h3>
-          </div>
-          <div class="ml-auto">
-            <a href="#" class="btn btn-light rounded-0 py-3 px-5 ">
-              Contact us
-            </a>
-          </div>
-        </div>
+      <div class="container ">
+       
         <div class="row">
 
           {links.map((link, index) => (

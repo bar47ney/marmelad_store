@@ -40,11 +40,32 @@ class OrderController {
       });
 
       if (!condidate) {
+        condidate = await Customer.findOne({
+          where: { name, phone },
+        });
+      }
+
+      if (!condidate) {
+        condidate = await Customer.findOne({
+          where: { name, email },
+        });
+      }
+
+      if (!condidate) {
+        condidate = await Customer.findOne({
+          where: { phone, email },
+        });
+      }
+
+      let condidateInBd = true;
+
+      if (!condidate) {
         condidate = await Customer.create({
           name,
           phone,
           email,
         });
+        condidateInBd = false;
       }
 
       const product = await Product.findOne({ where: { id: productId } });
@@ -60,7 +81,7 @@ class OrderController {
         orderId: order.id,
       });
 
-      return res.json(order);
+      return res.json({ order, condidateInBd });
     } catch (e) {
       next(ApiError.badRequest(e.message));
     }
@@ -69,7 +90,7 @@ class OrderController {
   async getAll(req, res) {
     let { limit, page } = req.query;
     page = page || 1;
-    limit = limit || 15;
+    limit = limit || 20;
     let offset = page * limit - limit;
     const orders = await Order.findAndCountAll({ limit, offset });
     return res.json(orders);
@@ -78,7 +99,9 @@ class OrderController {
     const { id } = req.params;
     const order = await Order.findOne({ where: { id } });
 
-    const customer = await Customer.findOne({ where: { id: order.customerId } });
+    const customer = await Customer.findOne({
+      where: { id: order.customerId },
+    });
 
     const orderContent = await OrderContent.findOne({
       where: { orderId: order.id },

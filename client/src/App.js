@@ -63,7 +63,7 @@ const App = () => {
         <BrowserRouter>
           <NavBar />
           <AppRouter />
-          <Footer />
+          <Footer />  
         </BrowserRouter>
       </div>
     </Context.Provider>

@@ -25,6 +25,7 @@ const ProductPay = ({ closeModal, product }) => {
           productQty: 0,
         });
         closeModal();
+        console.log(res.data)
       })
       .catch((e) => {
         console.log(e);

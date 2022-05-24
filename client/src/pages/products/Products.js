@@ -25,16 +25,17 @@ const Products = () => {
 
   return (
     <>
-      {" "}
       {viewSpinner ? (
         <Spinner />
       ) : (
-        <div className="container m-8">
+        <>
+        <h1 className="text-center m-3">Мармелад</h1>
+        <div className="container p-3">
           <div className="row">
             {products.map((product, id) => (
               <div
-                className="card m-4"
-                style={{ width: "18rem" }}
+                className="card m-3"
+                style={{ width: "20rem" }}
                 key={product.id}
               >
                 <img
@@ -61,6 +62,7 @@ const Products = () => {
             ))}
           </div>
         </div>
+        </>
       )}
     </>
   );

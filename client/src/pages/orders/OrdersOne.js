@@ -71,7 +71,7 @@ const OrdersOne = (props) => {
         </form>
       ) : (
         <div
-          className="card position-absolute top-50 start-50 translate-middle"
+          className="card m-5 mx-auto"
           style={{ width: "18rem" }}
         >
           <img
