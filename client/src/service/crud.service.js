@@ -32,4 +32,7 @@ export default class Crud {
   delete(id) {
     return http.delete(`api/${this.models}/${id}`);
   }
+  deleteAllByPay() {
+    return http.delete(`api/${this.models}/deleteallbypay`);
+  }
 }

@@ -41,7 +41,7 @@ class AdminController {
   }
 
   async check(req, res, next) {
-    const token = generateJwt(req.admin.id, req.admin.name, req.  admin.login);
+    const token = generateJwt(req.admin.id, req.admin.name, req.admin.login);
     return res.json({ token });
   }
 }

@@ -111,8 +111,24 @@ class OrderController {
     });
     return res.json({ order, orderContent, product, customer });
   }
+  async deleteAllByPay(req, res) {
+    try {
+      await Order.destroy({ where: { isPay: true } });
+      return res.json({ message: "Удаление произошло успешно!" });
+    } catch (e) {
+      next(ApiError.badRequest(e.message));
+    }
+  }
   async delete(req, res) {}
-  async update(req, res) {}
+  async update(req, res) {
+    try {
+      const { id } = req.params
+      const order = await Order.update(req.body, { where: { id } });
+      return res.json(order);
+    } catch (e) {
+      next(ApiError.badRequest(e.message));
+    }
+  }
 }
 
 module.exports = new OrderController();

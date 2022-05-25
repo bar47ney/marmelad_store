@@ -46,8 +46,8 @@ const Customers = () => {
                     <Link to={`/customers/${customer.id}`}>{customer.id}</Link>
                   </td>
                     <td>{customer.name}</td>
-                    <td>{customer.phone}</td>
                     <td>{customer.email}</td>
+                    <td>{customer.phone}</td>
                     <td>
                       <button
                         //   onClick={() => deleteThisUser(order)}

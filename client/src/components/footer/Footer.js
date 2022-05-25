@@ -35,100 +35,21 @@ const links = [
   },
 ];
 
-
 const Footer = () => {
   return (
-    <div class="site-section bg-dark mt-5">
-      <div class="container ">
-       
-        <div class="row">
-
-          {links.map((link, index) => (
-            <div class="col-sm">
-              <Link to={link.link} className="nav-link" onClick>
-                {link.name}
-              </Link>
-              <p class="copyright">
-                <small>&copy; 2019</small>
-              </p>
-            </div>
-          ))}
-
+    <div class="bg-dark pt-5 mt-5">
+      <div class="row">
+        <div class="col-sm"><Link to="/" className="link nav-link">LOGO</Link></div> 
+        {links.map((link, index) => (
           <div class="col-sm">
-            <a href="#" class="footer-logo">
-              Colorlib
-            </a>
-            <p class="copyright">
-              <small>&copy; 2019</small>
-            </p>
+            <Link to={link.link} className="link nav-link">
+              {link.name}
+            </Link>
           </div>
-          <div class="col-sm">
-            <h3>Customers</h3>
-            <ul class="list-unstyled links">
-              <li>
-                <a href="#">Buyer</a>
-              </li>
-              <li>
-                <a href="#">Supplier</a>
-              </li>
-            </ul>
-          </div>
-          <div class="col-sm">
-            <h3>Company</h3>
-            <ul class="list-unstyled links">
-              <li>
-                <a href="#">About us</a>
-              </li>
-              <li>
-                <a href="#">Careers</a>
-              </li>
-              <li>
-                <a href="#">Contact us</a>
-              </li>
-            </ul>
-          </div>
-          <div class="col-sm">
-            <h3>Further Information</h3>
-            <ul class="list-unstyled links">
-              <li>
-                <a href="#">Terms &amp; Conditions</a>
-              </li>
-              <li>
-                <a href="#">Privacy Policy</a>
-              </li>
-            </ul>
-          </div>
-          <div class="col-md-3">
-            <h3>Follow us</h3>
-            <ul class="list-unstyled social">
-              <li>
-                <a href="#">
-                  <span class="icon-facebook"></span>
-                </a>
-              </li>
-              <li>
-                <a href="#">
-                  <span class="icon-twitter"></span>
-                </a>
-              </li>
-              <li>
-                <a href="#">
-                  <span class="icon-linkedin"></span>
-                </a>
-              </li>
-              <li>
-                <a href="#">
-                  <span class="icon-medium"></span>
-                </a>
-              </li>
-              <li>
-                <a href="#">
-                  <span class="icon-paper-plane"></span>
-                </a>
-              </li>
-            </ul>
-          </div>
-        </div>
+        ))}
+      </div>
+      <div class="row">
+      <div class="col-sm text-center"><p className="copyright m-5">2022 BSUIR</p></div>
       </div>
     </div>
   );
