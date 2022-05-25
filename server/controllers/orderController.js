@@ -95,6 +95,14 @@ class OrderController {
     const orders = await Order.findAndCountAll({ limit, offset });
     return res.json(orders);
   }
+
+  async getAllByCustomer(req, res) {
+    const { id } = req.params;
+    console.log(id)
+    const orders = await Order.findAll({ where: { customerId: id } });
+    return res.json(orders);
+  }
+
   async getOne(req, res) {
     const { id } = req.params;
     const order = await Order.findOne({ where: { id } });
@@ -122,7 +130,7 @@ class OrderController {
   async delete(req, res) {}
   async update(req, res) {
     try {
-      const { id } = req.params
+      const { id } = req.params;
       const order = await Order.update(req.body, { where: { id } });
       return res.json(order);
     } catch (e) {

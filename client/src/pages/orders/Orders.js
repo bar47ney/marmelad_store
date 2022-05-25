@@ -51,6 +51,7 @@ const Orders = () => {
         <Spinner />
       ) : (
         <div className="container mt-5">
+        <h1 className="text-center m-5">Заказы</h1>
           <button
             type="button"
             class="btn btn-danger"

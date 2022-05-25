@@ -29,6 +29,7 @@ const Customers = () => {
         <Spinner />
       ) : (
         <div className="container mt-5">
+        <h1 className="text-center m-5">Покупатели</h1>
           <table className="table">
             <thead>
               <tr>

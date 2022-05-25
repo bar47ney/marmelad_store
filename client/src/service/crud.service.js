@@ -17,8 +17,11 @@ export default class Crud {
   getAll() {
     return http.get(`api/${this.models}`);
   }
-  get(page, number) {
-    return http.get(`api/${this.models}/?_page=${page}&_limit=${number}`);
+  getAllByExample(example, id) {
+    return http.get(`api/${this.models}/${example}/${id}`);
+  }
+  get(limit, page) {
+    return http.get(`api/${this.models}/?page=${page}&limit=${limit}`);
   }
   getOneById(id) {
     return http.get(`api/${this.models}/${id}`);

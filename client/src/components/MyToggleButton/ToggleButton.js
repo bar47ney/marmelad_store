@@ -1,10 +1,15 @@
 import React from "react";
 import "./ToggleButton.css";
+import Products from "../../pages/products/Products";
 
 const ToggleButton = () => {
+  const limit = 3
+  const page = 1
+
   return (
     <>
       <div className="container mt-5 mb-5">
+        <h1 className="text-center mb-3">Магазин мармелада</h1>
         <div
           id="carouselExampleIndicators"
           className="carousel slide"
@@ -74,6 +79,7 @@ const ToggleButton = () => {
             <span className="visually-hidden">Next</span>
           </button>
         </div>
+        <Products main={true}/>
       </div>
     </>
   );

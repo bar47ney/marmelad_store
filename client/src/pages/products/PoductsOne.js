@@ -6,7 +6,7 @@ import { NavLink } from "react-router-dom";
 import NotFound from "../NotFound";
 import Context from "../../context/context";
 import MyModal from "../../components/MyModal/MyModal";
-import ProductPay from "../products/ProductPay"
+import ProductPay from "../products/ProductPay";
 
 const ProductsOne = () => {
   const [error, setError] = useState();
@@ -52,7 +52,10 @@ const ProductsOne = () => {
             closeButtonShow
             title="Оформить заказ"
           >
-            <ProductPay closeModal={() => setShowModal(false)} product={product}/>
+            <ProductPay
+              closeModal={() => setShowModal(false)}
+              product={product}
+            />
           </MyModal>
           <div class="container text-center">
             <div class="row">
@@ -62,12 +65,17 @@ const ProductsOne = () => {
             </div>
             <div class="row">
               <div class="col">
-                <img
-                  src={`${process.env.REACT_APP_MARMELAD_STORE_API_URL}${product.img}`}
-                  className="card-img-top"
-                  alt="..."
-                  style={{ width: "8rem" }}
-                ></img>
+                <a
+                  href={`${process.env.REACT_APP_MARMELAD_STORE_API_URL}${product.img}`}
+                  target="_blank"
+                >
+                  <img
+                    src={`${process.env.REACT_APP_MARMELAD_STORE_API_URL}${product.img}`}
+                    className="card-img-top"
+                    alt="..."
+                    style={{ width: "8rem" }}
+                  ></img>
+                </a>
               </div>
             </div>
 

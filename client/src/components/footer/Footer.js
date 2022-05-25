@@ -37,11 +37,11 @@ const links = [
 
 const Footer = () => {
   return (
-    <div class="bg-dark pt-5 mt-5">
+    <div class="bg-dark p-5 mt-5">
       <div class="row">
-        <div class="col-sm"><Link to="/" className="link nav-link">LOGO</Link></div> 
+        <div class="col-sm text-center"><Link to="/" className="link nav-link">LOGO</Link></div> 
         {links.map((link, index) => (
-          <div class="col-sm">
+          <div class="col-sm text-center">
             <Link to={link.link} className="link nav-link">
               {link.name}
             </Link>
