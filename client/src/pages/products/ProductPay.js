@@ -2,10 +2,13 @@ import React, { useContext, useState } from "react";
 import { addUser } from "../../components/reducer/reducer";
 import Context from "../../context/context";
 import Crud from "../../service/crud.service";
+import Spinner from "../../components/Spinner";
 
 const ProductPay = ({ closeModal, product }) => {
   const { state, dispatch } = useContext(Context);
   const orderCrud = new Crud("order");
+
+  const [viewSpinner, setViewSpinner] = useState(false);
 
   const onChange = (e) => {
     const field = e.target.id;
@@ -14,6 +17,7 @@ const ProductPay = ({ closeModal, product }) => {
       : setValues({ ...values, [field]: e.target.value });
   };
   const createNewOrder = () => {
+    setViewSpinner(true);
     orderCrud
       .create(values)
       .then((res) => {
@@ -25,10 +29,14 @@ const ProductPay = ({ closeModal, product }) => {
           productQty: 0,
         });
         closeModal();
-        console.log(res.data)
+        console.log(res.data.order);
+        alert(`Ваш заказ под номером ${res.data.order.id} был создан! Можете закрыть это окно.`);
+        setViewSpinner(false);
       })
       .catch((e) => {
         console.log(e);
+        alert(e);
+        setViewSpinner(false);
       });
   };
   const [values, setValues] = useState({
@@ -54,7 +62,9 @@ const ProductPay = ({ closeModal, product }) => {
                 onChange={onChange}
                 className="mb-1 form-control"
               />
-              <label className="" for="floatingPassword">{value}</label>
+              <label className="" for="floatingPassword">
+                {value}
+              </label>
             </div>
 
             // <div className="" key={index}>
@@ -71,12 +81,12 @@ const ProductPay = ({ closeModal, product }) => {
       })}
       <div className="row">
         <div className="col">
-          <button
+          {viewSpinner ? <Spinner/> : <button
             className="btn btn-primary mt-2 btn-sm"
             onClick={createNewOrder}
           >
             Отправить
-          </button>
+          </button>}
         </div>
         <div className="col">
           <p>Итого сумма заказа BYN: {product.price * values.productQty}</p>

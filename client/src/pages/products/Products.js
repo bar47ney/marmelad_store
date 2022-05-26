@@ -28,7 +28,7 @@ const Products = ({ main }) => {
     fetchAllProducts();
   }, []);
 
-  const fetchAllProducts = (page = 1, limit = 3) => {
+  const fetchAllProducts = (page = 1, limit = 6) => {
     setCurrentPage(page);
     setViewSpinner(true);
     if (limit || page) {

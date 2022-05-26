@@ -1,5 +1,6 @@
 const { Order, Customer, OrderContent, Product } = require("../models/models");
 const ApiError = require("../error/ApiError");
+const nodemailer = require("nodemailer");
 
 class OrderController {
   // async create(req, res, next) {
@@ -81,6 +82,38 @@ class OrderController {
         orderId: order.id,
       });
 
+      //nodemailer
+      let testEmailAccount = await nodemailer.createTestAccount();
+
+      let transporter = nodemailer.createTransport({
+        service: "gmail",
+        auth: {
+          user: "bar47ney@gmail.com",
+          pass: "cthsfutyn47999",
+        },
+      });
+
+      let result = await transporter.sendMail({
+        from: '"Marmelade-store" <bar47ney@gmail.com>',
+        to: `${email}, ${email}`,
+        subject: "Marmelade-store: сведения о заказе",
+        text: "Ваш заказ был успешно оформлен!",
+        html: `<p><strong>${name}</strong>, ваш заказ был сформирован!<br/>Вы заказали <strong>${
+          product.name
+        }</strong> в количестве <strong>${productQty}</strong>.<br/>
+        Общая стоимсость составила: <strong>${
+          productQty * product.price
+        } BYN</strong>.<br/>Спасибо, что выбрали нас!</p>`,
+        attachments: [
+          {
+            // filename and content type is derived from path
+            path: `../server/static/${product.img}`,
+          },
+        ],
+      });
+
+      console.log(result);
+
       return res.json({ order, condidateInBd });
     } catch (e) {
       next(ApiError.badRequest(e.message));
@@ -90,7 +123,7 @@ class OrderController {
   async getAll(req, res) {
     let { limit, page } = req.query;
     page = page || 1;
-    limit = limit || 20;
+    limit = limit || 60;
     let offset = page * limit - limit;
     const orders = await Order.findAndCountAll({ limit, offset });
     return res.json(orders);
@@ -98,7 +131,7 @@ class OrderController {
 
   async getAllByCustomer(req, res) {
     const { id } = req.params;
-    console.log(id)
+    console.log(id);
     const orders = await Order.findAll({ where: { customerId: id } });
     return res.json(orders);
   }

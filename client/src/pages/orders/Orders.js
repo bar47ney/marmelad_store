@@ -66,6 +66,8 @@ const Orders = () => {
                 <th>Номер покупателя</th>
                 <th>Общая сумма заказа BYN</th>
                 <th>Статус оплаты</th>
+                <th>Создание заказа</th>
+                <th>Изменение заказа</th>
               </tr>
             </thead>
             <tbody>
@@ -94,6 +96,8 @@ const Orders = () => {
                         {console.log(order)}
                       </button>
                     </td>
+                    <td>{order.createdAt}</td>
+                    <td>{order.updatedAt}</td>
                     {/* <td>
                       <button
                         //   onClick={() => deleteThisUser(order)}

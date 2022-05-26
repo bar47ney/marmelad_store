@@ -60,7 +60,7 @@ const ProductsOne = () => {
           <div class="container text-center">
             <div class="row">
               <div class="col">
-                <h1>{product.name}</h1>
+                <h1 className="mt-5">{product.name}</h1>
               </div>
             </div>
             <div class="row">
@@ -71,9 +71,9 @@ const ProductsOne = () => {
                 >
                   <img
                     src={`${process.env.REACT_APP_MARMELAD_STORE_API_URL}${product.img}`}
-                    className="card-img-top"
+                    className="card-img-top border border-primary border-1 rounded-top"
                     alt="..."
-                    style={{ width: "8rem" }}
+                    style={{ width: "50%" }}
                   ></img>
                 </a>
               </div>
@@ -99,10 +99,10 @@ const ProductsOne = () => {
             <div class="row mt-3 text-wrap text-break text-start">
               <div class="сol">
                 <p>{product.description}</p>
-                <p>
+                {/* <p>
                   <span class="fw-bold">Партия: </span>
                   {product.party}
-                </p>
+                </p> */}
                 <p>
                   <span class="fw-bold">Код продукта: </span>
                   {product.productCode}
@@ -117,6 +117,8 @@ const ProductsOne = () => {
                 </p>
               </div>
             </div>
+
+            <h3 className="m-3">Почему стоит есть мармелад?</h3>
             <div class="row">
               <div class="col">
                 <div
@@ -133,20 +135,24 @@ const ProductsOne = () => {
                         aria-expanded="false"
                         aria-controls="flush-collapseOne"
                       >
-                        Accordion Item #1
+                        Факт #1
                       </button>
                     </h2>
                     <div
                       id="flush-collapseOne"
-                      class="accordion-collapse collapse"
+                      class="accordion-collapse collapse show"
                       aria-labelledby="flush-headingOne"
                       data-bs-parent="#accordionFlushExample"
                     >
                       <div class="accordion-body">
-                        Placeholder content for this accordion, which is
-                        intended to demonstrate the{" "}
-                        <code>.accordion-flush</code> class. This is the first
-                        item's accordion body.
+                        Процесс приготовления мармелада очень прост – фрукты
+                        варят с сахаром до достижения желаемого результата.
+                        Появился этот десерт в Малой Азии, откуда во время
+                        крестовых походов попал в Западную Европу и долгое время
+                        не выходил за её пределы. Сейчас он популярен по всему
+                        миру. Вероятнее всего, само слово “мармелад” в переводе
+                        с одного из диалектов французского языка означает
+                        “хорошо приготовленное яблочное блюдо”.
                       </div>
                     </div>
                   </div>
@@ -160,7 +166,7 @@ const ProductsOne = () => {
                         aria-expanded="false"
                         aria-controls="flush-collapseTwo"
                       >
-                        Accordion Item #2
+                        Факт #2
                       </button>
                     </h2>
                     <div
@@ -170,11 +176,12 @@ const ProductsOne = () => {
                       data-bs-parent="#accordionFlushExample"
                     >
                       <div class="accordion-body">
-                        Placeholder content for this accordion, which is
-                        intended to demonstrate the{" "}
-                        <code>.accordion-flush</code> class. This is the second
-                        item's accordion body. Let's imagine this being filled
-                        with some actual content.
+                        Несмотря не вышеупомянутую связь с яблоками, наиболее
+                        популярны мармелады из цитрусовых фруктов. В
+                        англоговорящих странах до сих пор этим словом означают
+                        только продукт, приготовленный именно из цитрусов. Если
+                        в качестве сырья использовались другие фрукты, десерт
+                        тоже называется иначе.
                       </div>
                     </div>
                   </div>
@@ -188,7 +195,7 @@ const ProductsOne = () => {
                         aria-expanded="false"
                         aria-controls="flush-collapseThree"
                       >
-                        Accordion Item #3
+                        Факт #3
                       </button>
                     </h2>
                     <div
@@ -198,14 +205,12 @@ const ProductsOne = () => {
                       data-bs-parent="#accordionFlushExample"
                     >
                       <div class="accordion-body">
-                        Placeholder content for this accordion, which is
-                        intended to demonstrate the{" "}
-                        <code>.accordion-flush</code> class. This is the third
-                        item's accordion body. Nothing more exciting happening
-                        here in terms of content, but just filling up the space
-                        to make it look, at least at first glance, a bit more
-                        representative of how this would look in a real-world
-                        application.
+                        Приготовленный из натуральных продуктов мармелад не
+                        только вкусен, но и весьма питателен и полезен. В 100
+                        граммах содержится около около 10 мг кальция и по 4 мг
+                        фосфора и магния. Поэтому в некоторых странах он не
+                        только продаётся в качестве десерта, но и входит в
+                        состав армейских сухих пайков для солдат и офицеров.
                       </div>
                     </div>
                   </div>
