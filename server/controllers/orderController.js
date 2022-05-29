@@ -131,7 +131,15 @@ class OrderController {
       next(ApiError.badRequest(e.message));
     }
   }
-  async delete(req, res) {}
+  async delete(req, res) {
+    try {
+      const { id } = req.params;
+      await Order.destroy({ where: { id } });
+      return res.json({ message: "Удаление произошло успешно!" });
+    } catch (e) {
+      next(ApiError.badRequest(e.message));
+    }
+  }
   async update(req, res) {
     try {
       const { id } = req.params;

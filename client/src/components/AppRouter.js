@@ -11,6 +11,9 @@ import Products from "../pages/products/Products";
 import Login from "./Login";
 import MainPage from "./MainPage/MainPage";
 import PostOne from "../pages/news/PostOne";
+import Contacts from "../pages/Contacts";
+import About from "../pages/About";
+import Feedbacks from "../pages/Feedbacks";
 
 const AppRouter = () => {
   const [toggle, setToggle] = useState(false);
@@ -28,6 +31,9 @@ const AppRouter = () => {
       <Route exact path="/order/:id" element={<OrdersOne />} />
       <Route path="/news" element={<Posts />} />
       <Route exact path="/news/:id" element={<PostOne />} />
+      <Route path="/contacts" element={<Contacts />} />
+      <Route path="/about" element={<About />} />
+      <Route path="/feedbacks" element={<Feedbacks />} />
       <Route path="*" element={<MainPage />} />
     </Routes>
   ) : (
@@ -38,6 +44,9 @@ const AppRouter = () => {
       <Route path="/products" element={<Products />} />
       <Route path="/news" element={<Posts />} />
       <Route exact path="/news/:id" element={<PostOne />} />
+      <Route path="/contacts" element={<Contacts />} />
+      <Route path="/about" element={<About />} />
+      <Route path="/feedbacks" element={<Feedbacks />} />
       <Route path="*" element={<MainPage />} />
     </Routes>
   );

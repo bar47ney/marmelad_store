@@ -4,6 +4,7 @@ import Spinner from "../../components/Spinner";
 import { Link } from "react-router-dom";
 import "./products.css";
 import { useSortedAndSearchedPosts } from "../../hooks/usePosts";
+import http from "../../http";
 
 const Products = ({ main }) => {
   const productsCrud = new Crud("product");
@@ -13,6 +14,9 @@ const Products = ({ main }) => {
   // limit=2, page=1, main
   const [sorter, setSorter] = useState(0);
   const [searchQuery, setSearcQuery] = useState("");
+
+  const [searchBrandQuery, setSearcBrandQuery] = useState("");
+  const [hiddenPagination, setHiddenPagination] = useState(false);
 
   const [lengthPages, setLengthPages] = useState(0);
   const pages = [];
@@ -59,8 +63,30 @@ const Products = ({ main }) => {
       });
   };
 
+  console.log(searchBrandQuery);
+
   const onSearch = (e) => {
     setSearcQuery(e.target.value);
+  };
+
+  const onSearchByBrand = (e) => {
+    setSearcBrandQuery(e.target.value);
+  };
+
+  const searchByBrand = () => {
+    setHiddenPagination(true)
+    setViewSpinner(true);
+    http
+      .get(`http://localhost:5000/api/product/vendor/${searchBrandQuery}`)
+      .then((res) => {
+        setProducts(res.data);
+        console.log(res);
+        setViewSpinner(false);
+      })
+      .catch((e) => {
+        alert(e);
+        setViewSpinner(false);
+      });
   };
 
   const onSort = (e) => {
@@ -94,6 +120,27 @@ const Products = ({ main }) => {
                 onChange={onSearch}
               />
             </div>
+
+            <div
+              className={`input-group mt-3 ${main ? "visually-hidden" : ""}`}
+            >
+              <span
+                className="input-group-text btn btn-primary"
+                id="basic-addon1"
+                onClick={() => searchByBrand()}
+              >
+                Поиск
+              </span>
+              <input
+                type="text"
+                className="form-control"
+                placeholder="Поиск по брэнду"
+                aria-label="Username"
+                aria-describedby="basic-addon1"
+                onChange={onSearchByBrand}
+              />
+            </div>
+
             <select
               className={`form-select mt-3 mb-5 ${
                 main ? "visually-hidden" : ""
@@ -143,7 +190,7 @@ const Products = ({ main }) => {
             <nav aria-label="Page navigation example">
               <ul
                 class={`pagination justify-content-center ${
-                  main ? "visually-hidden" : ""
+                  main || hiddenPagination ? "visually-hidden" : ""
                 }`}
               >
                 {pages.map((page) => (

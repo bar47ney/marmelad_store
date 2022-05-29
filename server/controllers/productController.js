@@ -42,7 +42,7 @@ class ProductController {
       next(ApiError.badRequest(e.message));
     }
   }
-  
+
   async getAll(req, res) {
     let { limit, page } = req.query;
     page = page || 1;
@@ -53,9 +53,18 @@ class ProductController {
   }
 
   async getAllByVendor(req, res) {
-    const { vendorId } = req.params;
-    const products = await Product.findAll({ where: { vendorId } });
-    return res.json(products);
+    try {
+      const { vendor } = req.params;
+      if (!vendor) {
+        return res.json("123");
+      }
+      const products = await Product.findAll({
+        where: { brandProduct: vendor },
+      });
+      return res.json(products);
+    } catch (e) {
+      next(ApiError.badRequest(e.message));
+    }
   }
 
   async getOne(req, res) {

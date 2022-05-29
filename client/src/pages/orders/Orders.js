@@ -45,6 +45,19 @@ const Orders = () => {
       });
   };
 
+
+  const deleteThisOrder = (order) => {
+    setViewSpinner(true);
+    console.log(order);
+    ordersCrud
+      .delete(order.id)
+      .then((res) => {
+        console.log(res.data);
+        fetchAllOrders();
+        setViewSpinner(false);
+      });
+  }
+
   return (
     <>
       {viewSpinner ? (
@@ -98,14 +111,14 @@ const Orders = () => {
                     </td>
                     <td>{order.createdAt}</td>
                     <td>{order.updatedAt}</td>
-                    {/* <td>
+                    <td>
                       <button
-                        //   onClick={() => deleteThisUser(order)}
+                          onClick={() => deleteThisOrder(order)}
                         className="btn btn-primary btn-sm"
                       >
-                        Delete
+                        Удалить
                       </button>
-                    </td> */}
+                    </td>
                   </tr>
                 ))
               ) : (
