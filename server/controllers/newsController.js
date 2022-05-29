@@ -36,15 +36,6 @@ class NewsController {
     return res.json(newss);
   }
 
-  async getAll(req, res) {
-    let { limit, page } = req.query;
-    page = page || 1;
-    limit = limit || 10;
-    let offset = page * limit - limit;
-    const newss = await News.findAndCountAll({ limit, offset });
-    return res.json(newss);
-  }
-
   async getAllByName(req, res) {
     const { name } = req.query;
     const newss = await News.findAll({ where: { name } });

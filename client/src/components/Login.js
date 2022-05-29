@@ -17,34 +17,24 @@ const Login = () => {
     setViewSpinner(true);
     e.preventDefault();
     http
-      .post("https://fakestoreapi.com/auth/login", values)
+      .post("http://localhost:5000/api/admin/login", values)
       .then((res) => {
-        dispatch({type: LOGIN, data: { session: res.data.token, user: values.username, users: [] }})
+        dispatch({
+          type: LOGIN,
+          data: { session: res.data.token, user: values.login, users: [] },
+        });
         window.localStorage.setItem("token", res.data.token);
-        window.localStorage.setItem("user", values.username);
-        console.log(res);
+        window.localStorage.setItem("user", values.login);
+        console.log(res.data.token);
       })
       .catch((e) => {
         console.log(e);
         setViewSpinner(false);
       });
-
-    // const userTest = {
-    //   login: "test",
-    //   password: "test",
-    // };
-    // userTest.login === values.login && userTest.password === values.password
-    //   ? setAuth({session: true, user: userTest.login})
-    //   : setAuth({session: false, user: ""});
-    // setValues({
-    //   login: "",
-    //   password: "",
-    // });
-    // return
   };
 
   const [values, setValues] = useState({
-    username: "",
+    login: "",
     password: "",
   });
 
@@ -53,21 +43,21 @@ const Login = () => {
   return viewSpinner ? (
     <Spinner />
   ) : (
-    <form className="container mt-5 col-6">
+    <form className="container col-6" style={{margin: "150px auto"}}> 
       <div className="mb-3">
         <label htmlFor="username" className="form-label">
-          Username
+          Логин
         </label>
         <input
           type="text"
           className="form-control"
-          id="username"
+          id="login"
           onChange={onChange}
         />
       </div>
       <div className="mb-3">
         <label htmlFor="password" className="form-label">
-          Password
+          Пароль
         </label>
         <input
           type="password"
@@ -76,18 +66,9 @@ const Login = () => {
           onChange={onChange}
         />
       </div>
-      <div className="mb-3 form-check">
-        <input
-          type="checkbox"
-          className="form-check-input"
-          id="exampleCheck1"
-        />
-        <label className="form-check-label" htmlFor="exampleCheck1">
-          Check me out
-        </label>
-      </div>
+
       <button className="btn btn-primary" onClick={signIn}>
-        Submit
+        Войти
       </button>
     </form>
   );

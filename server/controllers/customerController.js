@@ -1,7 +1,7 @@
 const { Customer, Order } = require("../models/models");
 const ApiError = require("../error/ApiError");
-const uuid = require("uuid")
-const path = require("path")
+const uuid = require("uuid");
+const path = require("path");
 
 class CustomerController {
   async create(req, res, next) {
@@ -15,21 +15,11 @@ class CustomerController {
         gender,
         age,
         addressId,
-        // orders
       } = req.body;
 
       const { photo } = req.files;
-      let fileName = uuid.v4() + ".jpg"
-      photo.mv(path.resolve(__dirname, "..", "static", fileName))
-
-      // if (orders){
-      //   orders = JSON.parse(orders)
-      //   orders.forEach(order => {
-      //     Order.create({
-
-      //     })
-      //   });
-      // }
+      let fileName = uuid.v4() + ".jpg";
+      photo.mv(path.resolve(__dirname, "..", "static", fileName));
 
       const customer = await Customer.create({
         name,

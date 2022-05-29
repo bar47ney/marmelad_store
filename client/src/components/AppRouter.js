@@ -1,27 +1,25 @@
-import React, { useState, useContext } from "react";
-import { Redirect, Routes, Route } from "react-router-dom";
-import Users from "../pages/users/Users";
-import Counter from "../components/CounterStudy";
-import MyToggleButton from "../components/MyToggleButton/ToggleButton";
-import Posts from "../pages/posts/Posts";
-import UserEdit from "../pages/users/UserEdit";
-import NotFound from "../pages/NotFound";
+import React, { useContext, useState } from "react";
+import { Route, Routes } from "react-router-dom";
 import Context from "../context/context";
-import Login from "./Login";
-import Products from "../pages/products/Products";
-import ProductsOne from "../pages/products/PoductsOne";
-import Orders from "../pages/orders/Orders";
 import Customers from "../pages/customers/Customers";
 import CustomersOne from "../pages/customers/CustomersOne";
+import Orders from "../pages/orders/Orders";
 import OrdersOne from "../pages/orders/OrdersOne";
+import Posts from "../pages/news/Posts";
+import ProductsOne from "../pages/products/PoductsOne";
+import Products from "../pages/products/Products";
+import Login from "./Login";
+import MainPage from "./MainPage/MainPage";
+import PostOne from "../pages/news/PostOne";
 
 const AppRouter = () => {
   const [toggle, setToggle] = useState(false);
+
   const { state } = useContext(Context);
 
   return state.session ? (
     <Routes>
-      <Route path="/" element={<MyToggleButton />} />
+      <Route path="/" element={<MainPage />} />
       <Route exact path="/customers" element={<Customers />} />
       <Route exact path="/customers/:id" element={<CustomersOne />} />
       <Route exact path="/product/:id" element={<ProductsOne />} />
@@ -29,12 +27,18 @@ const AppRouter = () => {
       <Route path="/orders" element={<Orders />} />
       <Route exact path="/order/:id" element={<OrdersOne />} />
       <Route path="/news" element={<Posts />} />
-      <Route path="*" element={<NotFound />} />
+      <Route exact path="/news/:id" element={<PostOne />} />
+      <Route path="*" element={<MainPage />} />
     </Routes>
   ) : (
     <Routes>
       <Route path="/login" element={<Login />} />
-      <Route path="*" element={<Login />} />
+      <Route path="/" element={<MainPage />} />
+      <Route exact path="/product/:id" element={<ProductsOne />} />
+      <Route path="/products" element={<Products />} />
+      <Route path="/news" element={<Posts />} />
+      <Route exact path="/news/:id" element={<PostOne />} />
+      <Route path="*" element={<MainPage />} />
     </Routes>
   );
 };

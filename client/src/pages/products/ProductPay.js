@@ -35,7 +35,7 @@ const ProductPay = ({ closeModal, product }) => {
       })
       .catch((e) => {
         console.log(e);
-        alert(e);
+        alert(e.request.responseText);
         setViewSpinner(false);
       });
   };
@@ -66,16 +66,6 @@ const ProductPay = ({ closeModal, product }) => {
                 {value}
               </label>
             </div>
-
-            // <div className="" key={index}>
-            //   <input
-            //     id={value}
-            //     value={values[value]}
-            //     placeholder={`Введите ${value}`}
-            //     onChange={onChange}
-            //     className="mb-1 form-control"
-            //   />
-            // </div>
           );
         }
       })}

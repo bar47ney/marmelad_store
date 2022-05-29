@@ -1,8 +1,7 @@
 import React from "react";
-import "./ToggleButton.css";
 import Products from "../../pages/products/Products";
 
-const ToggleButton = () => {
+const MainPage = () => {
   const limit = 3
   const page = 1
 
@@ -85,4 +84,4 @@ const ToggleButton = () => {
   );
 };
 
-export default ToggleButton;
+export default MainPage;

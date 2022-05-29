@@ -28,7 +28,11 @@ const NavBar = () => {
       link: "/contacts",
     },
     {
-      name: "|Заказы",
+      name: "Админ",
+      link: "/login",
+    },
+    {
+      name: "Заказы",
       link: "/orders",
     },
     {
@@ -46,7 +50,7 @@ const NavBar = () => {
     window.localStorage.clear();
   };
 
-  console.log(state)
+  console.log(state);
 
   return (
     <div>
@@ -76,13 +80,25 @@ const NavBar = () => {
             id="navbarNav"
           >
             <ul className="navbar-nav">
-              {links.map((link, index) => (
-                <li className="nav-item" key={index}>
-                  <Link to={link.link} className="nav-link" onClick={viewMenu}>
-                    {link.name}
-                  </Link>
-                </li>
-              ))}
+              {links.map((link, index) => {
+                if (
+                  !state.session &&
+                  (link.name === "Заказы" || link.name === "Покупатели")
+                ) {
+                } else {
+                  return (
+                    <li className="nav-item" key={index}>
+                      <Link
+                        to={link.link}
+                        className="nav-link"
+                        onClick={viewMenu}
+                      >
+                        {link.name}
+                      </Link>
+                    </li>
+                  );
+                }
+              })}
             </ul>
             {state.session ? (
               <div
@@ -97,7 +113,7 @@ const NavBar = () => {
                 </div>
 
                 <button className="btn btn-outline-secondary" onClick={logout}>
-                  LogOut
+                  Выйти
                 </button>
               </div>
             ) : (

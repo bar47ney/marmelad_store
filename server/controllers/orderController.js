@@ -3,31 +3,6 @@ const ApiError = require("../error/ApiError");
 const nodemailer = require("nodemailer");
 
 class OrderController {
-  // async create(req, res, next) {
-  //   try {
-  //     const {
-  //       date,
-  //       expireDate,
-  //       paymentDay,
-  //       isPay,
-  //       totalPrice,
-  //       customerId,
-  //     } = req.body;
-  //     const order = await Order.create({
-  //       date,
-  //       expireDate,
-  //       paymentDay,
-  //       isPay,
-  //       totalPrice,
-  //       customerId
-  //     });
-
-  //     return res.json(order);
-  //   } catch (e) {
-  //     next(ApiError.badRequest(e.message));
-  //   }
-  // }
-
   async create(req, res, next) {
     try {
       const { name, phone, email, productQty, productId } = req.body;
@@ -82,9 +57,6 @@ class OrderController {
         orderId: order.id,
       });
 
-      //nodemailer
-      let testEmailAccount = await nodemailer.createTestAccount();
-
       let transporter = nodemailer.createTransport({
         service: "gmail",
         auth: {
@@ -106,7 +78,6 @@ class OrderController {
         } BYN</strong>.<br/>Спасибо, что выбрали нас!</p>`,
         attachments: [
           {
-            // filename and content type is derived from path
             path: `../server/static/${product.img}`,
           },
         ],
