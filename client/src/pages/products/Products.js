@@ -1,10 +1,13 @@
-import React, { useEffect, useState, useRef } from "react";
+import React, { useEffect, useState, useContext } from "react";
 import Crud from "../../service/crud.service";
 import Spinner from "../../components/Spinner";
 import { Link } from "react-router-dom";
 import "./products.css";
 import { useSortedAndSearchedPosts } from "../../hooks/usePosts";
 import http from "../../http";
+import Context from "../../context/context";
+import MyModal from "../../components/MyModal/MyModal";
+import ProductAdd from "./ProductAdd";
 
 const Products = ({ main }) => {
   const productsCrud = new Crud("product");
@@ -25,6 +28,10 @@ const Products = ({ main }) => {
   }
 
   const [currentPage, setCurrentPage] = useState(0);
+  const { state, dispatch } = useContext(Context);
+  const [showModal, setShowModal] = useState(false);
+
+  const [brand, setBrand] = useState("Коммунарка");
 
   console.log(lengthPages);
 
@@ -74,10 +81,10 @@ const Products = ({ main }) => {
   };
 
   const searchByBrand = () => {
-    setHiddenPagination(true)
+    setHiddenPagination(true);
     setViewSpinner(true);
     http
-      .get(`http://localhost:5000/api/product/vendor/${searchBrandQuery}`)
+      .get(`http://localhost:5000/api/product/vendor/${brand}`)
       .then((res) => {
         setProducts(res.data);
         console.log(res);
@@ -93,11 +100,21 @@ const Products = ({ main }) => {
     setSorter(+e.target.value);
   };
 
+  const onBrand = (e) => {
+    setBrand(e.target.value);
+    // e.target.className.
+  };
+
+  console.log(brand);
   const sortedAndSearchedPosts = useSortedAndSearchedPosts(
     products,
     sorter,
     searchQuery
   );
+
+  const createNewProduct = () => {
+    setShowModal(true);
+  };
 
   return (
     <>
@@ -105,6 +122,14 @@ const Products = ({ main }) => {
         <Spinner />
       ) : (
         <>
+          <MyModal
+            visible={showModal}
+            onCancel={() => setShowModal(false)}
+            closeButtonShow
+            title="Добавить товар"
+          >
+            <ProductAdd closeModal={() => setShowModal(false)} />
+          </MyModal>
           <div className="container text-center">
             <h1 className="text-center m-5">Мармелад</h1>
             <div className={`input-group ${main ? "visually-hidden" : ""}`}>
@@ -131,16 +156,20 @@ const Products = ({ main }) => {
               >
                 Поиск
               </span>
-              <input
-                type="text"
-                className="form-control"
-                placeholder="Поиск по брэнду"
-                aria-label="Username"
-                aria-describedby="basic-addon1"
-                onChange={onSearchByBrand}
-              />
+              <select
+                className={`form-select ${main ? "visually-hidden" : ""}`}
+                aria-label="Default select example"
+                onChange={onBrand}
+              >
+                <option selected>Выберите брэнд (Например, Коммунарка)</option>
+                <option selected={brand === "Коммунарка" ? true : false} value="Коммунарка">Коммунарка</option>
+                <option selected={brand === "Красный пищевик" ? true : false} value="Красный пищевик">Красный пищевик</option>
+                <option selected={brand === "Спартак" ? true : false} value="Спартак">Спартак</option>
+              </select>
             </div>
+            {/* 111 */}
 
+            {/* 111 */}
             <select
               className={`form-select mt-3 mb-5 ${
                 main ? "visually-hidden" : ""
@@ -153,6 +182,17 @@ const Products = ({ main }) => {
               </option>
               <option value="1">Цена по убыванию</option>
             </select>
+            {state.session ? (
+              <button
+                onClick={() => createNewProduct()}
+                className="btn btn-primary btn-m m-3"
+              >
+                Добавить новый продукт
+              </button>
+            ) : (
+              ""
+            )}
+
             <div className="row">
               {sortedAndSearchedPosts.length ? (
                 sortedAndSearchedPosts.map((product, id) => (
@@ -174,6 +214,9 @@ const Products = ({ main }) => {
                         <ul className="list-group list-group-flush">
                           <li className="list-group-item">
                             Код продукта: {product.productCode}
+                          </li>
+                          <li className="list-group-item">
+                            Брэнд: {product.brandProduct}
                           </li>
                           <li className="list-group-item">
                             {product.price} BYN

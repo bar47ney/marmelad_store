@@ -38,6 +38,10 @@ const ProductsOne = () => {
       });
   };
 
+  const createMarkup = (text) => {
+    return { __html: `${text}` };
+  };
+
   return (
     <>
       {viewSpinner ? (
@@ -81,7 +85,7 @@ const ProductsOne = () => {
 
             <div class="row mt-3">
               <div class="col text-start">
-                <h2>Цена: {product.price} BYN</h2>
+                <h2 className="border bg-success text-white p-3 rounded-start" style={{ borderRadius: "20px" }}>Цена: {product.price} BYN</h2>
               </div>
 
               <div class="col">
@@ -96,25 +100,48 @@ const ProductsOne = () => {
               <div class="col"></div>
             </div>
 
-            <div class="row mt-3 text-wrap text-break text-start">
+            <div class="row mt-5">
+              <div class="col text-start">
+                <h3 className="">
+                  {product.title}
+                </h3>
+              </div>
+
+              <div class="col"></div>
+            </div>
+
+            <div class="row text-wrap text-break text-start">
               <div class="сol">
-                <p>{product.description}</p>
-                {/* <p>
-                  <span class="fw-bold">Партия: </span>
-                  {product.party}
-                </p> */}
-                <p>
-                  <span class="fw-bold">Код продукта: </span>
-                  {product.productCode}
-                </p>
-                <p>
-                  <span class="fw-bold">Тип продукта: </span>
-                  {product.typeProduct}
-                </p>
-                <p>
-                  <span class="fw-bold">Брэнд: </span>
-                  {product.brandProduct}
-                </p>
+                <div
+                  className="mb-3"
+                  dangerouslySetInnerHTML={createMarkup(product.description)}
+                ></div>
+              </div>
+              <div className="row">
+                <div
+                  className="col-md-3 col-sm-12 border bg-info text-white p-5 rounded-start"
+                  style={{ borderRadius: "20px" }}
+                >
+                  <p>
+                    <span class="fw-bold">Код продукта: </span>
+                    {product.productCode}
+                  </p>
+                  <p>
+                    <span class="fw-bold">Тип продукта: </span>
+                    {product.typeProduct}
+                  </p>
+                  <p>
+                    <span class="fw-bold">Брэнд: </span>
+                    {product.brandProduct}
+                  </p>
+                </div>
+                <div className="col-6"></div>
+                <div
+                  className="col-md-3 col-sm-12 border bg-success text-white p-5 rounded-end d-flex align-items-center"
+                  style={{ borderRadius: "20px" }}
+                >
+                  <h4 className="">Цена: {product.price} BYN</h4>
+                </div>
               </div>
             </div>
 

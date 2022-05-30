@@ -5,6 +5,9 @@ export const useSortedPosts = (posts, sorter) => {
     if (sorter) {
       return [...posts].sort((a, b) => b.price - a.price);
     }
+    if (!sorter) {
+      return [...posts].sort((a, b) => a.price - b.price);
+    }
     return posts;
   }, [sorter, posts]);
   return sortedPosts;
