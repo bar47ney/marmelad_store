@@ -85,7 +85,7 @@ const ProductsOne = () => {
 
             <div class="row mt-3">
               <div class="col text-start">
-                <h2 className="border bg-success text-white p-3 rounded-start" style={{ borderRadius: "20px" }}>Цена: {product.price} BYN</h2>
+                {/* <h2 className="border bg-success text-white p-3 rounded-start" style={{ borderRadius: "20px" }}>Цена: {product.price} BYN</h2> */}
               </div>
 
               <div class="col">
@@ -102,9 +102,7 @@ const ProductsOne = () => {
 
             <div class="row mt-5">
               <div class="col text-start">
-                <h3 className="">
-                  {product.title}
-                </h3>
+                <h3 className="">{product.title}</h3>
               </div>
 
               <div class="col"></div>
@@ -119,7 +117,7 @@ const ProductsOne = () => {
               </div>
               <div className="row">
                 <div
-                  className="col-md-3 col-sm-12 border bg-info text-white p-5 rounded-start"
+                  className="col-md-3 mb-3 col-sm-12 border border-5 p-5 rounded-start"
                   style={{ borderRadius: "20px" }}
                 >
                   <p>
@@ -135,9 +133,17 @@ const ProductsOne = () => {
                     {product.brandProduct}
                   </p>
                 </div>
-                <div className="col-6"></div>
+                <div className="col-6 text-center d-flex align-items-center justify-content-center">
+                  {/* <button
+                    type="submit"
+                    className="btn btn-primary m-1 btn-lg"
+                    onClick={show}
+                  >
+                    Заказать
+                  </button> */}
+                </div>
                 <div
-                  className="col-md-3 col-sm-12 border bg-success text-white p-5 rounded-end d-flex align-items-center"
+                  className="col-md-3 col-sm-12 border border-5 p-5 rounded-end d-flex align-items-center"
                   style={{ borderRadius: "20px" }}
                 >
                   <h4 className="">Цена: {product.price} BYN</h4>

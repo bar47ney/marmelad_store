@@ -79,7 +79,9 @@ const ProductPay = ({ closeModal, product }) => {
           </button>}
         </div>
         <div className="col">
-          <p>Итого сумма заказа BYN: {product.price * values.productQty}</p>
+          <p>Цена за единицу товара:<br/><strong>{product.price} BYN</strong></p>
+          <p>Количество товара:<br/><strong>{values.productQty} шт.</strong></p>
+          <p>Итого сумма заказа:<br/><strong>{product.price * values.productQty} BYN</strong></p>
         </div>
       </div>
     </>
