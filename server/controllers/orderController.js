@@ -66,7 +66,7 @@ class OrderController {
       });
 
       let result = await transporter.sendMail({
-        from: '"Marmelade-store" <bar47ney@gmail.com>',
+        from: '"Marmelade-store" <>',
         to: `${email}, ${email}`,
         subject: "Marmelade-store: сведения о заказе",
         text: "Ваш заказ был успешно оформлен!",
