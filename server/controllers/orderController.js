@@ -60,8 +60,8 @@ class OrderController {
       let transporter = nodemailer.createTransport({
         service: "gmail",
         auth: {
-          user: "bar47ney@gmail.com",
-          pass: "cthsfutyn47999",
+          user: "",
+          pass: "",
         },
       });
 
